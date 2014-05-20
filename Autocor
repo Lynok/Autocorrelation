@@ -1,0 +1,87 @@
+import java.awt.*;
+import java.applet.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.Scanner;
+
+public class Avtocor extends Frame {
+FileDialog dialogLoad;
+    public static void main (String [] argv){
+Avtocor h = new Avtocor();
+    }
+TextField inputFileName;
+    public class Listener1 implements ActionListener{
+     public void actionPerformed(ActionEvent e) {
+  inputFileName.setText(".txt");
+  //System.exit(0);
+     }
+     }
+TextField outputFileName;
+    public class Listener2 implements ActionListener{
+     public void actionPerformed(ActionEvent e) {
+  outputFileName.setText(".txt");
+  //System.exit(0);
+     }
+     }
+
+ try {
+ // TODO code application logic here
+ int n = 110;
+ double x_avg = 6.55; /* average of the data*/
+ Scanner readtxt = new Scanner(new File("C:\\Users\\rnea\\Documents\\NetBeansProjects\\Gempa1\\src\\data gempa.txt"));
+ List<String> x_t = new ArrayList<String>();
+ while (readtxt.hasNextLine()) {
+ x_t.add(readtxt.nextLine());
+ }
+
+ Frame myWindow;
+public Avtocor()
+ { 
+ setTitle("Автокореляція");  
+ setSize(400, 250);
+ GridLayout grid1= new GridLayout(10,1);// кількість стовбців, кількість рядків
+     setLayout(grid1);
+  Label label1 = new Label ("Завантажити вихідний файл");
+inputFileName = new TextField ("input.txt");
+  Button BtDownload = new Button ("Обзор");
+  Label label2 = new Label ("Створити файл збереження");
+  outputFileName = new TextField ("output.txt");
+  Button button2 = new Button ("Вибрати файл");
+  Label label3 = new Label ("Автокореляція є кореляцією функції з самою собою зміщеною на певну величину незалежної змінної. Автокореляція використовується для 
+
+знаходження закономірностей в ряді даних, таких як періодичність.");
+ Label label4 = new Label ("Значення максимального лага");
+ inputFileName = new TextField (" ");
+  Button button3 = new Button ("Порахувати автокореляцію");
+  add (label1);
+  add (inputFileName);
+  add (BtDownload);
+  BtDownload.addActionListener(new  Listener1 ());
+  add (label2);
+  add (outputFileName);
+  add (button2);
+  button2.addActionListener(new  Listener1 ());
+add (label4);
+add (inputFileName);
+  add (label3);
+  add (button3);
+  button3.addActionListener(new  Listener1 ());
+
+BtDownload.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dialogLoad = new FileDialog(myWindow, "Вибір файла", FileDialog.LOAD);
+		dialogLoad.show();
+		String s = dialogLoad.getFile();
+}
+	});
+
+         setVisible(true);
+ addWindowListener(new WindowAdapter(){
+     public void windowClosing(WindowEvent e){ 
+  System.exit(0);
+     }
+ });
+ } 
+}
+
+
