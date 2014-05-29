@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Avtocor extends Frame {
 FileDialog dialogLoad;
+
     public static void main (String [] argv){
 Avtocor h = new Avtocor();
     }
@@ -29,37 +30,35 @@ public Avtocor()
  { 
  setTitle("Автокореляція");  
  setSize(400, 250);
- GridLayout grid1= new GridLayout(10,1);// кількість стовбців, кількість рядків
+ GridLayout grid1= new GridLayout(8,1);// кількість стовбців, кількість рядків
      setLayout(grid1);
   Label label1 = new Label ("Завантажити вихідний файл");
-inputFileName = new TextField ("input.txt");
-  Button BtDownload = new Button ("Обзор");
-  Label label2 = new Label ("Створити файл збереження");
-  outputFileName = new TextField ("output.txt");
-  Button BtDownload2 = new Button ("Вибрати файл");
-  Label label3 = new Label ("Автокореляція є кореляцією функції з самою собою зміщеною на певну величину незалежної змінної. Автокореляція використовується для 
-
-знаходження закономірностей в ряді даних, таких як періодичність.");
- Label label4 = new Label ("Значення максимального лага");
- inputFileName = new TextField (" ");
-  Button button3 = new Button ("Порахувати автокореляцію");
   add (label1);
-  add (inputFileName);
-  add (BtDownload);
-  BtDownload.addActionListener(new  Listener1 ());
-  add (label2);
-  add (outputFileName);
-  add (BtDownload2);
-  BtDownload2.addActionListener(new  Listener1 ());
-add (label4);
-add (inputFileName);
-  add (label3);
-  add (button3);
-  button3.addActionListener(new  Listener1 ());
 
-BtDownload.addActionListener(new ActionListener() {
+  inputFileName = new TextField ("input.txt");
+  add (inputFileName);
+  
+  Button BtDownload = new Button ("Обзор");
+  add (BtDownload);
+  
+  Label label2 = new Label ("Створити файл збереження");
+  add (label2);
+  
+  outputFileName = new TextField ("output.txt");
+  add (outputFileName);
+  
+  Button BtDownload2 = new Button ("Вибрати файл");
+  add (BtDownload2);
+
+  Label label3 = new Label ("Автокореляція є кореляцією функції з самою собою зміщеною на певну величину незалежної змінної");
+  add (label3);
+  
+  Button button3 = new Button ("Порахувати автокореляцію");
+  add (button3);
+
+	BtDownload.addActionListener(new ActionListener() {
 public void actionPerformed(ActionEvent e) {
-dialogLoad = new FileDialog(myWindow, "Вибір файла", FileDialog.LOAD);
+dialogLoad = new FileDialog(myWindow, "Обзор", FileDialog.LOAD);
 dialogLoad.show();
 String file = dialogLoad.getFile();
 String directory = dialogLoad.getDirectory();
@@ -71,7 +70,7 @@ inputFileName.setText(fullFileName);
 
         BtDownload2.addActionListener(new ActionListener() {
 public void actionPerformed(ActionEvent e) {
-dialogLoad = new FileDialog(myWindow, "Вибір файла", FileDialog.SAVE);
+dialogLoad = new FileDialog(myWindow, "Вибрати файл", FileDialog.SAVE);
 dialogLoad.show();
 String file = dialogLoad.getFile();
 String directory = dialogLoad.getDirectory();
@@ -82,6 +81,20 @@ outputFileName.setText(fullFileName);
   }
 });
 
+	button3.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+MyFileClass fc = new MyFileClass();
+fc.openFile(inputFileName.getText());
+fc.readFile();
+fc.calculateAutocovar();
+fc.out();
+fc.writeFile(outputFileName.getText());
+//double [] mas = fc.getData();
+//inputFileName.setText(new Double(mas[3]).toString());
+//System.exit(0);
+		}
+	});
+
          setVisible(true);
  addWindowListener(new WindowAdapter(){
      public void windowClosing(WindowEvent e){ 
@@ -90,6 +103,3 @@ outputFileName.setText(fullFileName);
  });
  } 
 }
-
-
-
