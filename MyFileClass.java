@@ -8,16 +8,15 @@ import javax.swing.JOptionPane;
 
 public class MyFileClass
 {	static int N;
- static double[] x = new double[N];
-static double[ ] au = new double[N];
+ static double[] x = new double[10000];
+static double[ ] au = new double[10000];
 protected static int n, maxShift=3;
-     //int
 static Scanner scn;	
 
     public static void out()
     {
-        for(int col=0;col<n;col++){
-            System.out.print(x[col]+ " ");
+        for(int i=0;i<n;i++){
+            System.out.print(x[i]+ " ");
             System.out.println();
         }
     }
@@ -34,16 +33,16 @@ static Scanner scn;
 
     public static void readFile()
     {
-        int col=0;
-        while(scn.hasNext() && (col<x.length)){
-            x[col] = Double.parseDouble(scn.next());
-            col++;
+        int i=0;
+        while(scn.hasNext() && (i<x.length)){
+            x[i] = Double.parseDouble(scn.next());
+            i++;
         }
-        n=col;
+        n=i;
     }
 
 
- public static double[] calculateAutocovar()//float[] x,int maxShift)
+ public static double[ ] calculateAutocovar()
 {
  double total = 0;
 for (int i = 0; i < x.length; i++) {
@@ -54,21 +53,18 @@ double mean = total / x.length;
  int stop = Math.min(x.length, maxShift);
 double[ ] auto = new double[stop];
 double [ ] D= new double[1000];
+System.out.print("n=");
+System.out.print(n);
 for (int i = 0; i < stop; i++) {
-  for (int j = 0; j < x.length - i; j++) {
+  for (int j = 0; j < n - i; j++) {
     D [i] += (x[j]-mean) * (x[j]-mean);
     auto[i] += ((x[j]-mean) * (x[j + i]-mean));
   }
 au[i]=auto[i] /D[i];
+}
+N=n;
 return au;
 }
-}
-
-//public static float[] calculateAutocovar(float[] x) {
-// return calculateAutocovar(x, x.length);
-// }
-
-
 
     public static void writeFile(String fileName)
     {
@@ -81,9 +77,12 @@ file.createNewFile();
 //PrintWriter обеспечит возможности записи в файл
 PrintWriter out = new PrintWriter(file.getAbsoluteFile());
 try {
-  for(int i=0;i<N;i++){
+System.out.print("N=");
+System.out.print(N);
+  for(int i=0;i<maxShift;i++){
 out.print(au[i]);
 out.println();
+
 }
 }
 finally {
