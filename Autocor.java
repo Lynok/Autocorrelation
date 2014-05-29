@@ -86,11 +86,11 @@ public void actionPerformed(ActionEvent e) {
 MyFileClass fc = new MyFileClass();
 fc.openFile(inputFileName.getText());
 fc.readFile();
-double [] mas=fc.calculateAutocovar();
 fc.out();
-fc.writeFile(outputFileName.getText());
-//double [] mas = fc.getData();
+double [] mas = fc.getData();
+double [] masa=fc.calculateAutocovar();
 //inputFileName.setText(new Double(mas[3]).toString());
+fc.writeFile(outputFileName.getText());
 //System.exit(0);
 		}
 	});
