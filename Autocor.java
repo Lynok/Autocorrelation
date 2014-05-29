@@ -86,7 +86,7 @@ public void actionPerformed(ActionEvent e) {
 MyFileClass fc = new MyFileClass();
 fc.openFile(inputFileName.getText());
 fc.readFile();
-fc.calculateAutocovar();
+double [] mas=fc.calculateAutocovar();
 fc.out();
 fc.writeFile(outputFileName.getText());
 //double [] mas = fc.getData();
